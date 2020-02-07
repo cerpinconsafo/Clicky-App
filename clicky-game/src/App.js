@@ -1,36 +1,59 @@
-import React, { Component } from "react";
+import React from 'react';
 import FriendCard from "./components/FriendCard";
 import Wrapper from "./components/Wrapper";
-import Title from "./components/Title";
-import friends from "./friends.json";
+import Header from "./components/Header";
+import cards from "./images/images.json";
+import "./App.css";
 
-class App extends Component {
-  // Setting this.state.friends to the friends json array
+class App extends React.Component {
+  // Setting this.state.cards to the cards json array
   state = {
-    friends
+    cards,
+    score: 0,
+    highscore: 0
   };
 
-  removeFriend = id => {
-    // Filter this.state.friends for friends with an id not equal to the id being removed
-    const friends = this.state.friends.filter(friend => friend.id !== id);
-    // Set this.state.friends equal to the new friends array
-    this.setState({ friends });
-  };
+  gameOver = () => {
+    if (this.state.score > this.state.highscore) {
+      this.setState({highscore: this.state.score}, function() {
+        console.log(this.state.highscore);
+      });
+    }
+    this.state.cards.forEach(card => {
+      card.count = 0;
+    });
+    alert(`Game Over :( \nscore: ${this.state.score}`);
+    this.setState({score: 0});
+    return true;
+  }
 
-  // Map over this.state.friends and render a FriendCard component for each friend object
+  clickCount = id => {
+    this.state.cards.find((o, i) => {
+      if (o.id === id) {
+        if(cards[i].count === 0){
+          cards[i].count = cards[i].count + 1;
+          this.setState({score : this.state.score + 1}, function(){
+            console.log(this.state.score);
+          });
+          this.state.cards.sort(() => Math.random() - 0.5)
+          return true; 
+        } else {
+          this.gameOver();
+        }
+      }
+    });
+  }
+  // Map over this.state.cards and render a cardCard component for each card object
   render() {
     return (
       <Wrapper>
-        <Title>Friends List</Title>
-        {this.state.friends.map(friend => (
+        <Header score={this.state.score} highscore={this.state.highscore}>The Big Brain Clicky 200 IQ Game</Header>
+        {this.state.cards.map(card => (
           <FriendCard
-            removeFriend={this.removeFriend}
-            id={friend.id}
-            key={friend.id}
-            name={friend.name}
-            image={friend.image}
-            occupation={friend.occupation}
-            location={friend.location}
+            clickCount={this.clickCount}
+            id={card.id}
+            key={card.id}
+            image={card.image}
           />
         ))}
       </Wrapper>
@@ -39,3 +62,4 @@ class App extends Component {
 }
 
 export default App;
+// ------------------------
