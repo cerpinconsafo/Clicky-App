@@ -5,7 +5,7 @@ const Header = props => (
   <div className="header">
     <div className="title">{props.children}</div>
     <div className="scores">
-      Current Score: {props.score} Highscore: {props.highscore}
+      Current Score: {props.score} High Score: {props.highscore}
     </div>
   </div>
 );

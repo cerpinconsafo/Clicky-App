@@ -14,36 +14,36 @@ class App extends React.Component {
   };
 
   gameOver = () => {
-    if (this.state.score > this.state.highscore) {
-      this.setState({highscore: this.state.score}, function() {
+    if (this.state.score >= this.state.highscore) {
+      this.setState({ highscore: this.state.score }, function () {
         console.log(this.state.highscore);
       });
     }
-    this.state.cards.forEach(card => {
-      card.count = 0;
+    this.state.cards.forEach(cards => {
+      cards.count = 0;
     });
-    alert(`You IMBECILE! Game Over!( \nFinal Score: ${this.state.score}`);
-    this.setState({score: 0});
-    return true;
+    alert(`How unintelligent of you. \nYou chose that character already. \nGame over. \nFinal Score: ${this.state.score}`);
+    this.setState({ score: 0 });
+    // return true;
   }
 
   clickCount = id => {
     this.state.cards.find((o, i) => {
       if (o.id === id) {
-        if(cards[i].count === 0){
+        if (cards[i].count === 0) {
           cards[i].count = cards[i].count + 1;
-          this.setState({score : this.state.score + 1}, function(){
+          this.setState({ score: this.state.score + 1 }, function () {
             console.log(this.state.score);
           });
-          this.state.cards.sort(() => Math.random() - 0.25)
-          return true; 
+          this.state.cards.sort(() => Math.random() - .45)
+          return true;
         } else {
           this.gameOver();
         }
       }
     });
   }
-  // Map over this.state.cards and render a cardCard component for each card object
+  // Map over this.state.cards and render a Card component for each card object
   render() {
     return (
       <Wrapper>
