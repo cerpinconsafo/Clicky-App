@@ -1,11 +1,12 @@
 .card {
   background: #fff;
-  border-radius: 2px;
-  height: 325px;
+  border-radius: 10px;
+  height: 200px;
   margin: 1rem;
   position: relative;
-  width: 325px;
-  box-shadow: 0 3px 6px #999, 0 3px 6px #999;
+  display: flex;
+  width: 200px;
+  box-shadow: 0 3px 6px rgb(255, 153, 238), 0 3px 6px rgb(255, 153, 238);
   text-align: left;
 }
 
@@ -13,13 +14,13 @@
   height: 60%;
   overflow: hidden;
   text-align: center;
-  background:#6CADDC;
+  background: rgba(115, 250, 255, 0.699);
 }
 .card > .img-container > img {
   width: 60%
 }
 
-.card > .content {
+/* .card > .content {
   padding-left: 1rem;
   padding-right: 1rem;
   font-size: 15px;
@@ -31,7 +32,7 @@
 
 .card > .content > ul > li {
   margin-top: 18px;
-}
+} */
 
 .card > .remove {
   color: #ff1744;
@@ -42,6 +43,24 @@
   cursor: pointer;
 }
 
-.card > .remove:hover {
-  color: #d50000;
+.card:hover {
+  box-shadow: 0 4px 10px rgb(117, 255, 89), 0 4px 10px rgb(117, 255, 89);
+  transition: box-shadow .25s ease;
+}
+
+
+/* [1] The container */
+.img-hover-zoom {
+  /* height: 300px; [1.1] Set it as per your need */
+  overflow: hidden; /* [1.2] Hide the overflowing of child elements */
+}
+
+/* [2] Transition property for smooth transformation of images */
+.img-hover-zoom img {
+  transition: transform .5s ease;
+}
+
+/* [3] Finally, transforming the image when container gets hovered */
+.img-hover-zoom:hover img {
+  transform: scale(1.5);
 }

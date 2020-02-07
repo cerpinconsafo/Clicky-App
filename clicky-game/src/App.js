@@ -22,7 +22,7 @@ class App extends React.Component {
     this.state.cards.forEach(card => {
       card.count = 0;
     });
-    alert(`Game Over :( \nscore: ${this.state.score}`);
+    alert(`You IMBECILE! Game Over!( \nFinal Score: ${this.state.score}`);
     this.setState({score: 0});
     return true;
   }
@@ -35,7 +35,7 @@ class App extends React.Component {
           this.setState({score : this.state.score + 1}, function(){
             console.log(this.state.score);
           });
-          this.state.cards.sort(() => Math.random() - 0.5)
+          this.state.cards.sort(() => Math.random() - 0.25)
           return true; 
         } else {
           this.gameOver();
